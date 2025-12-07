@@ -1,6 +1,8 @@
-from openai import AsyncOpenAI
-from app.core.config import settings
 import logging
+
+from openai import AsyncOpenAI
+
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -9,7 +11,10 @@ class OpenAIService:
     def __init__(self):
         self.client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
         self.model = "gpt-4o-mini"  # Cost effective and fast
-        self.system_prompt = "You are a helpful and friendly AI assistant on WhatsApp. Keep your responses concise and engaging."
+        self.system_prompt = (
+            "You are a helpful and friendly AI assistant on WhatsApp. "
+            "Keep your responses concise and engaging."
+        )
 
     async def generate_response(
         self, user_message: str, context: list[dict] = None
@@ -19,7 +24,8 @@ class OpenAIService:
 
         Args:
             user_message: The current message from the user.
-            context: List of previous messages in format [{"role": "user", "content": "..."}, ...]
+            context: List of previous messages in format
+                [{"role": "user", "content": "..."}, ...]
         """
         messages = [{"role": "system", "content": self.system_prompt}]
 

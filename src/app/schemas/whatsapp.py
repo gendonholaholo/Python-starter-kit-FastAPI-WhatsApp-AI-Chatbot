@@ -1,5 +1,4 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
 
 
 class WhatsAppText(BaseModel):
@@ -11,11 +10,11 @@ class WhatsAppMessage(BaseModel):
     id: str
     timestamp: str
     type: str
-    text: Optional[WhatsAppText] = None
+    text: WhatsAppText | None = None
 
 
 class WhatsAppContact(BaseModel):
-    profile: Dict[str, str]
+    profile: dict[str, str]
     wa_id: str
 
 
@@ -27,8 +26,8 @@ class WhatsAppMetadata(BaseModel):
 class WhatsAppValue(BaseModel):
     messaging_product: str
     metadata: WhatsAppMetadata
-    contacts: Optional[List[WhatsAppContact]] = None
-    messages: Optional[List[WhatsAppMessage]] = None
+    contacts: list[WhatsAppContact] | None = None
+    messages: list[WhatsAppMessage] | None = None
 
 
 class WhatsAppChange(BaseModel):
@@ -38,9 +37,9 @@ class WhatsAppChange(BaseModel):
 
 class WhatsAppEntry(BaseModel):
     id: str
-    changes: List[WhatsAppChange]
+    changes: list[WhatsAppChange]
 
 
 class WhatsAppWebhook(BaseModel):
     object: str
-    entry: List[WhatsAppEntry]
+    entry: list[WhatsAppEntry]

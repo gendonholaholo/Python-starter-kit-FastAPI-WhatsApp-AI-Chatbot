@@ -1,7 +1,6 @@
-from sqlmodel import SQLModel
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from app.core.config import settings
+from sqlmodel import SQLModel
 
 DATABASE_URL = "sqlite+aiosqlite:///./whatsapp.db"
 

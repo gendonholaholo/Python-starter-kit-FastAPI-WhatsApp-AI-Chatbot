@@ -1,9 +1,11 @@
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
+
+from app.api.v1.router import api_router
 from app.core.config import settings
-from app.core.logging import setup_logging
 from app.core.database import init_db
-from app.models.chat import User, Conversation, Message  # Import to register models
+from app.core.logging import setup_logging
 
 
 @asynccontextmanager
@@ -18,8 +20,6 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
     lifespan=lifespan,
 )
-
-from app.api.v1.router import api_router
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
 

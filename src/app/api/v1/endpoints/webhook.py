@@ -1,8 +1,10 @@
-from fastapi import APIRouter, Query, HTTPException, Request, Response, BackgroundTasks
+import logging
+
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Query
+
 from app.core.config import settings
 from app.schemas.whatsapp import WhatsAppWebhook
 from app.services.chat import chat_service
-import logging
 
 router = APIRouter()
 logger = logging.getLogger(__name__)

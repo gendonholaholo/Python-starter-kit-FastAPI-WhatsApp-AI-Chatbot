@@ -1,10 +1,12 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlmodel import select, desc
-from app.models.chat import User, Conversation, Message
-from app.services.whatsapp import whatsapp_client
-from app.services.ai import openai_service
-from app.core.database import get_session
 import logging
+
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlmodel import desc, select
+
+from app.core.database import get_session
+from app.models.chat import Conversation, Message, User
+from app.services.ai import openai_service
+from app.services.whatsapp import whatsapp_client
 
 logger = logging.getLogger(__name__)
 
