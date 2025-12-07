@@ -1,0 +1,37 @@
+[project]
+name = "python-starter-kit"
+version = "0.1.0"
+description = "FastAPI WhatsApp AI Chatbot Starter Kit"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiosqlite",
+    "fastapi[standard]",
+    "greenlet>=3.3.0",
+    "httpx",
+    "openai",
+    "pydantic-settings",
+    "python-dotenv",
+    "sqlmodel",
+    "uvicorn[standard]",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.3.0",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP"]
+ignore = []
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]
