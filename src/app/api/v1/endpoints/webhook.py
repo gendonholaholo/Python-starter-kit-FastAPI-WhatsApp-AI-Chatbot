@@ -7,6 +7,7 @@ import logging
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
+
 @router.get("/webhook")
 async def verify_webhook(
     mode: str = Query(..., alias="hub.mode"),
@@ -19,9 +20,10 @@ async def verify_webhook(
     if mode == "subscribe" and token == settings.WHATSAPP_VERIFY_TOKEN:
         logger.info("Webhook verified successfully")
         return int(challenge)
-    
+
     logger.warning("Webhook verification failed")
     raise HTTPException(status_code=403, detail="Verification failed")
+
 
 @router.post("/webhook")
 async def handle_webhook(payload: WhatsAppWebhook, background_tasks: BackgroundTasks):
@@ -29,23 +31,27 @@ async def handle_webhook(payload: WhatsAppWebhook, background_tasks: BackgroundT
     Handle incoming WhatsApp messages.
     """
     logger.info(f"Received webhook payload: {payload.model_dump_json(indent=2)}")
-    
+
     for entry in payload.entry:
         for change in entry.changes:
             if change.value.messages:
                 for message in change.value.messages:
                     if message.type == "text" and message.text:
-                         # Extract necessary info
+                        # Extract necessary info
                         wa_id = message.from_
-                        name = change.value.contacts[0].profile["name"] if change.value.contacts else "Unknown"
+                        name = (
+                            change.value.contacts[0].profile["name"]
+                            if change.value.contacts
+                            else "Unknown"
+                        )
                         body = message.text.body
-                        
+
                         # Process in background
                         background_tasks.add_task(
                             chat_service.process_message,
                             wa_id=wa_id,
                             name=name,
-                            message_body=body
+                            message_body=body,
                         )
-                    
+
     return {"status": "success"}

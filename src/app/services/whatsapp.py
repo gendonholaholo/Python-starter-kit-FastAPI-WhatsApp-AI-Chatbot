@@ -4,6 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class WhatsAppClient:
     def __init__(self):
         self.api_url = f"https://graph.facebook.com/v21.0/{settings.WHATSAPP_PHONE_NUMBER_ID}/messages"
@@ -20,7 +21,7 @@ class WhatsAppClient:
             "type": "text",
             "text": {"body": body},
         }
-        
+
         async with httpx.AsyncClient() as client:
             try:
                 response = await client.post(
@@ -32,7 +33,8 @@ class WhatsAppClient:
             except httpx.HTTPError as e:
                 logger.error(f"Failed to send message: {e}")
                 if isinstance(e, httpx.HTTPStatusError):
-                     logger.error(f"Response content: {e.response.text}")
+                    logger.error(f"Response content: {e.response.text}")
                 raise
+
 
 whatsapp_client = WhatsAppClient()
