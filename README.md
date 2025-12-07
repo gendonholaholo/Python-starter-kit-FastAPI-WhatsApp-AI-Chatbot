@@ -1,4 +1,4 @@
-# FastAPI WhatsApp AI Chatbot Starter Kit 🚀
+# FastAPI WhatsApp AI Chatbot Starter Kit
 
 A production-ready starter kit to build efficient WhatsApp Chatbots powered by AI (OpenAI), built with **FastAPI**, **SQLModel**, and **Asyncio**.
 
