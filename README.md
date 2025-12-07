@@ -1,4 +1,6 @@
-# FastAPI WhatsApp AI Chatbot Starter Kit
+# FastAPI WhatsApp AI Chatbot Starter Kit 🚀
+
+[![CI](https://github.com/gendonholaholo/Python-starter-kit-FastAPI-WhatsApp-AI-Chatbot/actions/workflows/ci.yml/badge.svg)](https://github.com/gendonholaholo/Python-starter-kit-FastAPI-WhatsApp-AI-Chatbot/actions/workflows/ci.yml)
 
 A production-ready starter kit to build efficient WhatsApp Chatbots powered by AI (OpenAI), built with **FastAPI**, **SQLModel**, and **Asyncio**.
 
